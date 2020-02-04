@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ioTest</title>
+</head>
+<body>
+
+
+
+
+    Input: <input type="text" id="input" value = "inp">
+<br><br>
+    <button onclick="dothings()"> Check </button>
+<br>
+    <p id = "output"></p>
+
+
+<script>
+
+//nastie global boye is needed because js is asychronous
+    var allthewords = [];
+
+
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                getAndPass(this.responseText);
+                console.log("LOADED DICTIONARY DATA");
+            }
+        };
+        xhttp.open("GET", "dictionary.txt", true);
+        xhttp.send();
+    }
+
+    function getAndPass(text){
+        allthewords = text.split(/[\s,\n]+/);
+        console.log("data parsed");
+    }
+
+
+    function dothings(){
+
+       compare(getUserInput());
+    }
+
+    function getUserInput(){
+        var input = document.getElementById("input");
+        var text = input.value;
+        return text;
+    }
+
+    function compare(text){
+        document.getElementById("output").innerHTML = "Input: "+text;
+
+        var lowestDifference = text.length;
+        var closestMatch = null;
+        for(var i = 0; i < allthewords.length; i++){
+            var entry = allthewords[i].toLowerCase();
+            if (text == entry){
+                //word is correct
+                document.getElementById("output").innerHTML = "Input: "+text + "  Matches with: " + entry;
+                lowestDifference = 0;
+                return entry;
+            }
+            else if(text.length === entry.length){
+               var diff = findDifferences(text,entry);
+                if(diff < lowestDifference){
+                    lowestDifference = diff;
+                    closestMatch = entry;
+                }
+            }
+        }
+        document.getElementById("output").innerHTML = "Input: "+text + "  Matches with: " + closestMatch;
+            return closestMatch;
+    }
+
+    function findDifferences(text, entry){
+        var count = 0;
+        for(var i = 0; i < text.length; i++){
+            if(text.charAt(i) !== entry.charAt(i)){
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+    window.addEventListener("load", loadDoc);
+</script>
+
+
+</body>
+</html>
