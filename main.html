@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no"/>
+    <meta name ="mobile-web-app-capable" content="yes"/>
+
+    <title>Keyboard 2: Electric Boogaloo</title>
+
+    <style>
+
+        @media screen and (orientation: portrait) {
+            .txtE{
+                color: red;
+            }
+            div.keyb{
+                position:fixed;
+                width: 100%;
+                bottom: 10vh;
+                text-align: center;
+                z-index: 2;
+            }
+
+            .row button{
+                width: 50px;
+            }
+            button{
+                height: 5vw;
+                font-size: 3vw;
+            }
+            .backsp{
+                padding-left: 70px;
+                padding-right: 70px;
+            }
+        }
+
+        @media screen and (orientation: landscape) {
+            .txtE{
+                color: green;
+            }
+            div.keyb{
+                position:fixed;
+                width: 100%;
+                bottom: 5vh;
+                text-align: center;
+            }
+
+            .row button{
+                height: 25px;
+                padding: 8px 5px 15px 12px;
+            }
+
+            .backsp{
+                padding-left: 10px;
+                padding-right: 20px;
+            }
+
+
+        }
+
+        .txtE{
+            height: 55vh;
+            font-size: 20px;
+            width: 100%;
+            border: 1px solid black;
+        }
+
+
+
+        .left, .right{
+            width: 35%;
+        }
+        .left button, .right button{
+            border-radius: 35%;
+        }
+        .left{
+            float: left;
+            text-align: left;
+        }
+        .right{
+            float: right;
+            text-align: right;
+            padding-right: 20px;
+        }
+
+
+
+
+
+        button{
+            background-color: white;
+            text-align: center;
+
+        }
+
+        button:active{
+            background-color: grey;
+        }
+
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="menu">
+    <button id="style1" onclick="changeStyle(this.id)">Blur Keyboard</button>
+    <button id="style2" onclick="changeStyle(this.id)">Highlight Homekeys</button>
+    <button id="style3" onclick="changeStyle(this.id)">Gradient Kyes</button>
+    <button id="style4" onclick="changeStyle(this.id)">Dot Buttons</button>
+    <button id="style5" onclick="changeStyle(this.id)">Coloured Keys</button>
+    <button id="style6" onclick="changeStyle(this.id)">Highlight Start Keys</button>
+
+    <button id="clearCSS" onclick="changeStyle(this.id)">Back to Normal</button>
+
+</div>
+
+
+<div class="txtE">
+    <p id="inp">Start typing for stuff to appear....</p>
+</div>
+
+
+
+<div class="keyb" id="keyboard">
+
+    <button id="clear" onClick="clearAll()">CLEAR</button>
+
+
+
+
+    <div class = "row">
+        <div class = "left">
+            <button id="q" ontouchstart="typeLetter(this.id)">q</button>
+            <button id="w" ontouchstart="typeLetter(this.id)">w</button>
+            <button id="e" ontouchstart="typeLetter(this.id)">e</button>
+            <button id="r" ontouchstart="typeLetter(this.id)">r</button>
+            <button id="t" ontouchstart="typeLetter(this.id)">t</button>
+        </div>
+        <div class = "right">
+            <button id="y" ontouchstart="typeLetter(this.id)">y</button>
+            <button id="u" ontouchstart="typeLetter(this.id)">u</button>
+            <button id="i" ontouchstart="typeLetter(this.id)">i</button>
+            <button id="o" ontouchstart="typeLetter(this.id)">o</button>
+            <button id="p" ontouchstart="typeLetter(this.id)">p</button>
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class = "left">
+            <button id="a" ontouchstart="typeLetter(this.id)">a</button>
+            <button id="s" ontouchstart="typeLetter(this.id)">s</button>
+            <button id="d" ontouchstart="typeLetter(this.id)">d</button>
+            <button id="f" ontouchstart="typeLetter(this.id)">f</button>
+            <button id="g" ontouchstart="typeLetter(this.id)">g</button>
+        </div>
+        <div class = "right">
+            <button id="g" ontouchstart="typeLetter(this.id)">g</button>
+            <button id="h" ontouchstart="typeLetter(this.id)">h</button>
+            <button id="j" ontouchstart="typeLetter(this.id)">j</button>
+            <button id="k" ontouchstart="typeLetter(this.id)">k</button>
+            <button id="l" ontouchstart="typeLetter(this.id)">l</button>
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class = "left">
+            <button id="shift" ontouchstart="setFlag(!shiftFlag)">&#8657;</button>
+            <button id="z" ontouchstart="typeLetter(this.id)">z</button>
+            <button id="x" ontouchstart="typeLetter(this.id)">x</button>
+            <button id="c" ontouchstart="typeLetter(this.id)">c</button>
+            <button id="v" ontouchstart="typeLetter(this.id)">v</button>
+        </div>
+        <div class = "right">
+            <button id="b" ontouchstart="typeLetter(this.id)">b</button>
+            <button id="n" ontouchstart="typeLetter(this.id)">n</button>
+            <button id="m" ontouchstart="typeLetter(this.id)">m</button>
+            <button id="BACKSPACE" class="backsp" onClick="backspace()">&#8678;</button>
+        </div>
+    </div>
+
+
+    <div class = "row">
+        <div class = "left">
+            <button id="&#44;"  onClick="typeLetter(this.id)">&#44;</button>
+            <button id="&#32;" class="space" onClick="typeLetter(this.id)">␣</button>
+        </div>
+        <div class = "right">
+            <button id="&#32;" class="space" onClick="typeLetter(this.id)">␣</button>
+            <button id="&#46;" onClick="typeLetter(this.id)">&#46;</button>
+        </div>
+    </div>
+
+
+</div>
+
+<!--<div class="touchlog">
+    <p><u>Log Of Touches</u></p>
+    <ul id="log"></ul>
+</div> -->
+
+
+<script>
+
+    var shiftFlag = false;
+
+    function setFlag(flag){
+        shiftFlag = flag;
+        if(shiftFlag == true){
+            document.getElementById("shift").style.borderColor = "yellow";
+            document.getElementById("shift").style.backgroundColor = "yellow";
+        }
+        else{
+            document.getElementById("shift").style.borderColor = "black";
+            document.getElementById("shift").style.backgroundColor = "white";
+        }
+    }
+
+    function typeLetter(letter_id){
+
+        var letter = letter_id;
+        if(shiftFlag == true){
+            letter = letter.toUpperCase();
+        }
+
+        if(document.getElementById("inp").innerHTML == "Start typing for stuff to appear...."){
+            document.getElementById("inp").innerHTML = letter;
+            setFlag(false);
+        }
+
+        else{
+            document.getElementById("inp").innerHTML = document.getElementById("inp").innerHTML + letter;
+            setFlag(false);
+        }
+
+    }
+
+
+    function clearAll(){
+        document.getElementById("inp").innerHTML = "";
+    }
+
+    function backspace(){
+        var lngth =  document.getElementById("inp").innerHTML.length -1;
+
+        document.getElementById("inp").innerHTML = document.getElementById("inp").innerHTML.slice(0,lngth);
+    }
+
+    function changeStyle(style) {
+
+
+        if(style == "clearCSS"){
+            document.getElementById("keyboard").style.filter =  "blur(0)";
+
+            var allBtn = alphabet("abcdefghijklmnopqrstuvwxyz");
+            var tL = allBtn.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = allBtn[i];
+                document.getElementById(ayedee).style.backgroundColor =  "white";
+                document.getElementById(ayedee).style.borderRadius = "30%";
+                document.getElementById(ayedee).style.transition = "1s";
+
+            }
+
+        }
+
+
+        else if(style == "style1"){
+            document.getElementById("keyboard").style.filter =  "blur(4px)";
+        }
+
+        else if(style == "style2"){
+            document.getElementById("f").style.backgroundColor =  "red";
+            document.getElementById("j").style.backgroundColor =  "red";
+        }
+
+        else if(style == "style3"){
+            var btns = alphabet("qazplm");
+            var tL = btns.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = btns[i];
+                document.getElementById(ayedee).style.backgroundColor =  "#000";
+            }
+            var btns2 = alphabet("wsxokn");
+            var tL = btns2.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = btns2[i];
+                document.getElementById(ayedee).style.backgroundColor =  "#444";
+            }
+            var btns3 = alphabet("edcijb");
+            var tL = btns3.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = btns3[i];
+                document.getElementById(ayedee).style.backgroundColor =  "#777";
+            }
+            var btns4 = alphabet("rfvhu");
+            var tL = btns4.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = btns4[i];
+                document.getElementById(ayedee).style.backgroundColor =  "#999";
+            }
+            var btns5 = alphabet("tyg");
+            var tL = btns5.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = btns5[i];
+                document.getElementById(ayedee).style.backgroundColor =  "#BBB";
+            }
+        }
+        else if(style == "style4"){
+            var butns = alphabet("abcdefghijklmnopqrstuvwxyz");
+            var bL = butns.length;
+            for(var i = 0; i < bL; i++){
+                var ayedee = butns[i];
+                document.getElementById(ayedee).style.borderRadius = "50%";
+                document.getElementById(ayedee).style.backgroundColor = "red";
+                document.getElementById(ayedee).style.fontSize = "0";
+            }
+        }
+        else if(style == "style5"){
+            var btns1 = alphabet("qazplm");
+            var tL = btns1.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = btns1[i];
+                document.getElementById(ayedee).style.backgroundColor =  "red";
+            }
+
+            var btns2 = alphabet("wesdxioknj");
+            var tL = btns2.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = btns2[i];
+                document.getElementById(ayedee).style.backgroundColor =  "orange";
+            }
+
+            var btns3 = alphabet("rtyufghcvb");
+            var tL = btns3.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = btns3[i];
+                document.getElementById(ayedee).style.backgroundColor =  "green";
+            }
+        }
+        else if(style == "style6"){
+            var btns = alphabet("asdfjkl");
+            var tL = btns.length;
+            for(var i = 0; i < tL; i++){
+                var ayedee = btns[i];
+                document.getElementById(ayedee).style.backgroundColor =  "pink";
+            }
+        }
+
+
+
+
+    };
+
+    //string of letters are parsed and plopped in an array
+    function alphabet(stringoStarr){
+        var alph = stringoStarr;
+        var full =[];
+        for(var i = 0; i< alph.length; i++ ){
+            var j = i + 1;
+            var beet = alph.substring(i,j);
+            full.push(beet);
+        }
+        return full;
+    };
+
+    var x, y;
+
+    function ontouchstart(event){
+        x = event.touches[0].clientX;
+        y = event.touches[0].clientY;
+        var node = document.createElement("LI");
+        var textnode = document.createTextNode("Touch Start At "+Math.round(x)+","+Math.round(y));
+        node.appendChild(textnode);
+        document.getElementById("log").appendChild(node);
+
+    };
+
+
+    function ontouchend(event){
+//just for doumenting points, should be moved to a text file or something for actual user experiemnts
+        x = event.changedTouches[0].clientX;
+        y = event.changedTouches[0].clientY;
+        var node = document.createElement("LI");
+        var textnode = document.createTextNode("Touch End At "+Math.round(x)+","+Math.round(y));
+        node.appendChild(textnode);
+        document.getElementById("log").appendChild(node);
+    };
+
+    function getKeyLocation(){
+        var keyboardpoints = keyb.getBoundingClientRect();
+        console.log(Math.round(keyboardpoints.top), keyboardpoints.right, Math.round(keyboardpoints.bottom), keyboardpoints.left);
+        var lettuce = alphabet("qwertyuiopasdfghjklzxcvbnm");
+        var tL = lettuce.length;
+        for(var i = 0; i < tL; i++){
+            var ayedee = lettuce[i];
+            var points = document.getElementById(ayedee).getBoundingClientRect();
+            console.log(" I D: "+ document.getElementById(ayedee), Math.round(points.top), Math.round(points.right), Math.round(points.bottom), Math.round(points.left));
+        }
+    };
+
+
+    function init(){
+        keyb = document.getElementById("keyboard");
+
+        keyb.addEventListener("touchstart", ontouchstart);
+        keyb.addEventListener("touchend", ontouchend);
+        keyb.addEventListener("touchcancel", ontouchend);
+
+        getKeyLocation();
+
+
+    }
+
+
+    window.addEventListener("load", init);
+</script>
+
+
+
+</body>
+</html>
