@@ -225,14 +225,15 @@
     function typeLetter(letter_id){
         var letter;
 
-        if (letter_id == "tl"||"tr"){
+        if (letter_id === "tl"||letter_id === "tr"){
             letter = "t";
         }
-        else if(letter_id == "gl"||"gr"){
+        else if(letter_id === "gl"||letter_id === "gr"){
             letter = "g";
         }
         else{
             letter = letter_id;
+            console.log(letter);
         }
 
         if(shiftFlag == true){
@@ -248,7 +249,6 @@
         }
 
         else{
-
             document.getElementById("inp").innerHTML = document.getElementById("inp").innerHTML + letter;
             setFlag(false);
         }
@@ -385,7 +385,7 @@
 
     var x, y;
 
-    function ontouchstart(event){
+  /*  function ontouchstart(event){
         x = event.touches[0].clientX;
         y = event.touches[0].clientY;
         var node = document.createElement("LI");
@@ -393,10 +393,10 @@
         node.appendChild(textnode);
         document.getElementById("log").appendChild(node);
 
-    };
+    };*/
 
 
-    function ontouchend(event){
+ /*   function ontouchend(event){
 //just for doumenting points, should be moved to a text file or something for actual user experiemnts
         x = event.changedTouches[0].clientX;
         y = event.changedTouches[0].clientY;
@@ -404,7 +404,7 @@
         var textnode = document.createTextNode("Touch End At "+Math.round(x)+","+Math.round(y));
         node.appendChild(textnode);
         document.getElementById("log").appendChild(node);
-    };
+    };*/
 
   /*  function getKeyLocation(){
         var keyboardpoints = keyb.getBoundingClientRect();
@@ -422,11 +422,11 @@
     function init(){
         keyb = document.getElementById("keyboard");
 
-        keyb.addEventListener("touchstart", ontouchstart);
-        keyb.addEventListener("touchend", ontouchend);
-        keyb.addEventListener("touchcancel", ontouchend);
-
-        getKeyLocation();
+        // keyb.addEventListener("touchstart", ontouchstart);
+        // keyb.addEventListener("touchend", ontouchend);
+        // keyb.addEventListener("touchcancel", ontouchend);
+        //
+        // getKeyLocation();
 
 
     }
