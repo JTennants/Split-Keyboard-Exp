@@ -165,9 +165,10 @@
             <button id="z" ontouchstart="typeLetter(this.id)">z</button>
             <button id="x" ontouchstart="typeLetter(this.id)">x</button>
             <button id="c" ontouchstart="typeLetter(this.id)">c</button>
-            <button id="v" ontouchstart="typeLetter(this.id)">v</button>
+            <button id="vl" ontouchstart="typeLetter(this.id)">v</button>
         </div>
         <div class = "right">
+            <button id="vr" ontouchstart="typeLetter(this.id)">v</button>
             <button id="b" ontouchstart="typeLetter(this.id)">b</button>
             <button id="n" ontouchstart="typeLetter(this.id)">n</button>
             <button id="m" ontouchstart="typeLetter(this.id)">m</button>
@@ -214,6 +215,9 @@
         else if(letter_id === "gl"||letter_id === "gr"){
             letter = "g";
         }
+        else if(letter_id === "vl"||letter_id === "vr"){
+            letter = "v";
+        }
         else{
             letter = letter_id;
         }
@@ -249,12 +253,20 @@
     }
 
     function loadPhrases(){
-//do nothing
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                getAndPass2(this.responseText);
+                console.log("LOADED PHRASESET");
+            }
+        };
+        xhttp.open("GET", "phrases.txt", true);
+        xhttp.send();
     }
 
     function wordC(){
         var lastW = getWords();
-        console.log("Last Word is: "+lastW);
         replaceWord(compare(lastW));
 
     }
@@ -285,10 +297,16 @@
         console.log("data parsed");
     }
 
+    var phrases = [];
+    function getAndPass2(text) {
+        phrases = text.split("*");
+        phrases.shift();
+    }
+
+
 
 
     function compare(text) {
-console.log("text being given is ; " + text)
         var lowestDifference = text.length;
         var closestMatch = null;
         for (var i = 0; i < allthewords.length; i++) {
