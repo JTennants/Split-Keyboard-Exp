@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -180,17 +179,16 @@
     <div class = "row">
         <div class = "left">
             <button id="&#44;"  onClick="typeLetter(this.id)">&#44;</button>
-            <button id="&#32;" class="space" onClick="wordCorrector();typeLetter(this.id);"></button>
+            <button id="&#32;" class="space" onClick="wordC();typeLetter(this.id);"></button>
         </div>
         <div class = "right">
-            <button id="&#32;" class="space" onClick="wordCorrector();typeLetter(this.id);"></button>
+            <button id="&#32;" class="space" onClick="wordC();typeLetter(this.id);"></button>
             <button id="&#46;" onClick="typeLetter(this.id)">&#46;</button>
         </div>
     </div>
 
 
 </div>
-
 
 
 <script>
@@ -251,15 +249,89 @@
     }
 
     function loadPhrases(){
-//load phrases o be typed from server
+//do nothing
     }
-    function wordCorrector(){
-        console.log("Word corrector is working");
+
+    function wordC(){
+        var lastW = getWords();
+        console.log("Last Word is: "+lastW);
+        replaceWord(compare(lastW));
+
     }
+
+    function getWords(){
+        var words = document.getElementById("inp").innerHTML;
+        var word = words.split(" ");
+        return word[word.length - 1];
+    }
+
+
+    var allthewords = [];
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                getAndPass(this.responseText);
+                console.log("LOADED DICTIONARY DATA");
+            }
+        };
+        xhttp.open("GET", "dictionary.txt", true);
+        xhttp.send();
+    }
+
+    function getAndPass(text) {
+        allthewords = text.split(/[\s,\n]+/);
+        console.log("data parsed");
+    }
+
+
+
+    function compare(text) {
+console.log("text being given is ; " + text)
+        var lowestDifference = text.length;
+        var closestMatch = null;
+        for (var i = 0; i < allthewords.length; i++) {
+            var entry = allthewords[i].toLowerCase();
+            if (text == entry) {
+                //word is correct
+
+                lowestDifference = 0;
+                return entry;
+            }
+            else if (text.length === entry.length) {
+                var diff = findDifferences(text, entry);
+                if (diff < lowestDifference) {
+                    lowestDifference = diff;
+                    closestMatch = entry;
+                }
+            }
+        }
+
+        return closestMatch;
+    }
+
+    function findDifferences(text, entry) {
+        var count = 0;
+        for (var i = 0; i < text.length; i++) {
+            if (text.charAt(i) !== entry.charAt(i)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    function replaceWord(replacement){
+        var words = document.getElementById("inp").innerHTML;
+        var word = words.split(" ");
+        word[word.length - 1] = replacement;
+        document.getElementById("inp").innerHTML = word.join(" ");
+    }
+
 
     function init(){
-       loadPhrases();
-
+        loadPhrases();
+        loadDoc();
     }
 
 
