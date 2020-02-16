@@ -1,7 +1,3 @@
-<?php
-  session_start();
-  $_SESSION["accept_id"];
-  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,7 +119,7 @@
 
 <div class="keyb" id="keyboard">
 
-    <button id="done" onClick="clearAll()">Done!</button>
+    <button id="done" onClick="finishedTyping()">Done!</button>
 
 
 
@@ -245,6 +241,17 @@
 
     }
 
+    var changeCounter = 0;
+    function finishedTyping(){
+        if (changeCounter == 0){
+            document.getElementById("totype").innerHTML = phrases[1];
+            changeCounter++;
+        }
+        else if (changeCounter == 1){
+            window.location.href = "standard.php";
+        }
+        clearAll();
+    }
 
     function clearAll(){
         document.getElementById("inp").innerHTML = "";
@@ -305,6 +312,7 @@
     function getAndPass2(text) {
         phrases = text.split("*");
         phrases.shift();
+        document.getElementById("totype").innerHTML = phrases[0];
     }
 
 
@@ -354,6 +362,7 @@
     function init(){
         loadPhrases();
         loadDoc();
+
     }
 
 
