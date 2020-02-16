@@ -123,8 +123,7 @@ $_SESSION["accept_id"];
 
 <div class="keyb" id="keyboard">
 
-    <button id="done" onClick="clearAll()">Done!</button>
-
+    <button id="done" onClick="finishedTyping()">Done!</button>
 
 
 
@@ -247,45 +246,53 @@ $_SESSION["accept_id"];
 
     }
 
+    var changeCounter = 0;
+    function finishedTyping(){
+        if (changeCounter == 0){
+            document.getElementById("totype").innerHTML = phrases[3];
+            changeCounter++;
+        }
+        else if (changeCounter == 1){
+            document.getElementById("totype").innerHTML = phrases[4];
+            changeCounter++;
+        }
+        else if (changeCounter == 2){
+            ////change location to next layout
+        }
+
+        ///save errors and clear
+        saveErrors();
+        clearAll();
+    }
 
     function clearAll(){
+        document.getElementById("inp").innerHTML = "";
+        bspaceCounter = 0;
+        correctionCounter = 0;
+    }
+
+    function saveErrors(){
         //save errors that have been logged
         //save backspaces that have been logged
-        bspaceCounter;
-        correctionCounter;
-
-        <?php
-        $host = "devweb2019.cis.strath.ac.uk";
-        $user = "rnb16141";
-        $pass = "eimahQuai4Vo";
-        $dbname = "rnb16141";
-        $conn = new mysqli($host, $user, $pass, $dbname);
-
-       $acceptid = $_SESSION["accept_id"];
-
-       $acorrections =
-        //issue query
-
-        $sql  = "INSERT INTO `corrections_exp1` (`accept_id`, `design_id`, `phrase_id`, `alg_corrections`, `manual_corrections`) VALUES ('$acceptid', null , null , '$acorrections', '$mcorrections')";
-
-
-
-        if($conn->query($sql) === TRUE){echo "Nice";}
-
-        else{
-            die("Addition Failed ".$conn->connect_error); //FIXME remove once working
-        }
-        ?>
-
-        document.getElementById("inp").innerHTML = "";
-
+        var str = "bsp="+bspaceCounter+"&corc="+correctionCounter;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               console.log(this.responseText);
+            }
+        };
+        xhttp.open("GET", "handleCorrections.php?"+str, true);
+        xhttp.send();
     }
+
+
 
     function backspace(){
         var lngth =  document.getElementById("inp").innerHTML.length -1;
 
         document.getElementById("inp").innerHTML = document.getElementById("inp").innerHTML.slice(0,lngth);
-        bspaceCounter = bspaceCounter+1;
+        bspaceCounter++;
+        console.log(bspaceCounter);
     }
 
     function loadPhrases(){
@@ -337,6 +344,7 @@ $_SESSION["accept_id"];
     function getAndPass2(text) {
         phrases = text.split("*");
         phrases.shift();
+        document.getElementById("totype").innerHTML = phrases[2];
     }
 
 
@@ -359,11 +367,14 @@ $_SESSION["accept_id"];
                     lowestDifference = diff;
                     closestMatch = entry;
 
-                    correctionCounter = correctionCounter+1;
                 }
             }
         }
 
+        if (closestMatch !== text){
+            correctionCounter++;
+            console.log(correctionCounter);
+        }
         return closestMatch;
     }
 
