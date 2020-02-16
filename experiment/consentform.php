@@ -50,7 +50,7 @@
         function assignID(){
           <?php $_SESSION["accept_id"] = rand(0,10000); ?>
 
-            window.location.href ="practice.php";
+            window.location.href ="practice.html";
         };
 
     </script>
