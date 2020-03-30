@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no"/>
+    <meta name ="mobile-web-app-capable" content="yes"/>
+    <title>Final Keyboard Design</title>
+    <link rel="stylesheet" type="text/css" href="myStylesheet.css">
+
+</head>
+
+
+<body>
+
+
+<div id = "bod">
+
+    <div class="txtE">
+        <p id="inp">|</p>
+    </div>
+
+
+
+    <br>
+    <button id="left" ontouchstart="moveCursor('left')" style="text-align: left">&#9668</button>
+    <button id="right" ontouchstart="moveCursor('right')"style="text-align: left">&#9658</button>
+
+    <div class="openings">
+<div class = "left" id = "numbersgrouping">
+        <div id="numbers" class="numbers">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeBar('numbers')">&#10005;</a>
+            <button id="0" ontouchstart="typeLetter(this.id)">0</button>
+            <button id="1" ontouchstart="typeLetter(this.id)">1</button>
+            <button id="2" ontouchstart="typeLetter(this.id)">2</button>
+            <button id="4" ontouchstart="typeLetter(this.id)">4</button>
+            <button id="5" ontouchstart="typeLetter(this.id)">5</button>
+            <button id="6" ontouchstart="typeLetter(this.id)">6</button>
+            <button id="7" ontouchstart="typeLetter(this.id)">7</button>
+            <button id="8" ontouchstart="typeLetter(this.id)">8</button>
+            <button id="9" ontouchstart="typeLetter(this.id)">9</button>
+        </div>
+</div>
+
+    <div class = "right" id = "charactersgrouping">
+        <div id="characters" class="characters">
+            <button id="&#64;" ontouchstart="typeLetter(this.id)">&#64;</button>
+            <button id="&#163;" ontouchstart="typeLetter(this.id)">&#163;</button>
+            <button id="&#33;" ontouchstart="wordC();typeLetter(this.id);typeLetter('&#32;')">&#33;</button>
+            <button id="&#8211;" ontouchstart="wordC();typeLetter(this.id);typeLetter('&#32;')">&#8211;</button>
+            <button id="&#38;" ontouchstart="typeLetter(this.id),typeLetter('&#32;')">&#38;</button>
+            <button id="&#47;" ontouchstart="typeLetter(this.id)">&#47;</button>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeBar('characters')">&#10005;</a>
+        </div>
+    </div>
+</div>
+
+
+    <div class="keyb" id="keyboard">
+
+        <div class = "row">
+            <div class = "left">
+                <button id="q" ontouchstart="typeLetter(this.id)" style="background-color: red">q</button>
+                <button id="w" ontouchstart="typeLetter(this.id)"style="background-color: red">w</button>
+                <button id="e" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">e</button>
+                <button id="r" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">r</button>
+                <button id="tl" ontouchstart="typeLetter(this.id)"style="background-color: cornflowerblue">t</button>
+            </div>
+            <div class = "right">
+                <button id="tr" ontouchstart="typeLetter(this.id)"style="background-color: cornflowerblue">t</button>
+                <button id="y" ontouchstart="typeLetter(this.id)"style="background-color: cornflowerblue">y</button>
+                <button id="u" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">u</button>
+                <button id="i" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">i</button>
+                <button id="o" ontouchstart="typeLetter(this.id)"style="background-color: red">o</button>
+                <button id="p" ontouchstart="typeLetter(this.id)"style="background-color: red">p</button>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class = "left">
+                <button id="a" ontouchstart="typeLetter(this.id)" style="background-color: red">a</button>
+                <button id="s" ontouchstart="typeLetter(this.id)"style="background-color: red">s</button>
+                <button id="d" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">d</button>
+                <button id="f" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">f</button>
+                <button id="gl" ontouchstart="typeLetter(this.id)"style="background-color: cornflowerblue">g</button>
+            </div>
+            <div class = "right">
+                <button id="gr" ontouchstart="typeLetter(this.id)"style="background-color: cornflowerblue">g</button>
+                <button id="h" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">h</button>
+                <button id="j" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">j</button>
+                <button id="k" ontouchstart="typeLetter(this.id)"style="background-color: red">k</button>
+                <button id="l" ontouchstart="typeLetter(this.id)"style="background-color: red">l</button>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class = "left">
+                <button id="shift" ontouchstart="setFlag(!shiftFlag)">&#8657;</button>
+                <button id="z" ontouchstart="typeLetter(this.id)"style="background-color: red">z</button>
+                <button id="x" ontouchstart="typeLetter(this.id)"style="background-color: red">x</button>
+                <button id="c" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">c</button>
+                <button id="vl" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">v</button>
+            </div>
+            <div class = "right">
+                <button id="vr" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">v</button>
+                <button id="b" ontouchstart="typeLetter(this.id)"style="background-color: greenyellow">b</button>
+                <button id="n" ontouchstart="typeLetter(this.id)"style="background-color: red">n</button>
+                <button id="m" ontouchstart="typeLetter(this.id)"style="background-color: red">m</button>
+                <button id="BACKSPACE" class="backsp" ontouchstart="backspace()">&#8678;</button>
+            </div>
+        </div>
+
+
+
+        <div class = "row">
+            <div class = "left">
+                <button class="openbtn" id="numbergroup" onclick="openBar('numbers')">123</button>
+                <button id="&#44;"  onClick="wordC();typeLetter(this.id);typeLetter('&#32;')" style="border: 1px solid lightgrey">&#44;</button>
+                <button id="&#32;" class="space" onClick="wordC();typeLetter(this.id);" style="border: 1px solid lightgrey; border-radius: 20%"></button>
+            </div>
+            <div class = "right">
+                <button id="&#32;" class="space" onClick="wordC();typeLetter(this.id);" style="border: 1px solid lightgrey; border-radius: 20%"></button>
+                <button id="&#46;" onClick="wordC();typeLetter(this.id);typeLetter('&#32;')" style="border: 1px solid lightgrey">&#46;</button>
+                <button class="openbtn" id="chargroup" onclick="openBar('characters')">!?&</button>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+</div>
+
+<script>
+
+    var shiftFlag = true;
+    var cursorPos = 0;
+
+    function setFlag(flag){
+        shiftFlag = flag;
+        if(shiftFlag == true){
+            document.getElementById("shift").style.backgroundColor = "yellow";
+        }
+        else{
+            document.getElementById("shift").style.backgroundColor = "white";
+        }
+    }
+
+    function typeLetter(letter_id){
+
+        var letter;
+        var existing = document.getElementById("inp").innerHTML.split("|");
+        var content = existing[0].split("");
+
+
+
+        if (letter_id === "tl"||letter_id === "tr"){
+            letter = "t";
+        }
+        else if(letter_id === "gl"||letter_id === "gr"){
+            letter = "g";
+        }
+        else if(letter_id === "vl"||letter_id === "vr"){
+            letter = "v";
+        }
+        else{
+            letter = letter_id;
+        }
+
+        if(shiftFlag == true){
+            letter = letter.toUpperCase();
+        }
+
+
+            document.getElementById("inp").innerHTML = content.join("") + letter + "|" + existing[1];
+            cursorPos = document.getElementById("inp").innerHTML.indexOf("|");
+            setFlag(false);
+
+
+    }
+
+    function clearAll(){
+        document.getElementById("inp").innerHTML = "|";
+    }
+
+
+    function openBar(element) {
+        if(element=="numbers"){
+            document.getElementById("numbers").style.width = "200px";
+        }
+        if(element=="characters"){
+            document.getElementById("characters").style.width = "200px";
+        }
+    }
+
+    function closeBar(element) {
+        if(element=="numbers"){
+            document.getElementById("numbers").style.width = "0px";
+        }
+        if(element=="characters"){
+            document.getElementById("characters").style.width = "0px";
+        }
+    }
+
+
+function moveCursor(direction){
+
+    cursorPos = document.getElementById("inp").innerHTML.indexOf("|");
+
+    if (cursorPos == 0){
+        //do nothign
+    }
+    else {
+        var existing = document.getElementById("inp").innerHTML.split("|");
+        var content = existing[0].split("");
+
+
+        if (direction === "left") {
+            var x = content[cursorPos - 1];
+            content[cursorPos - 1] = "|";
+            content.push(x);
+            content.push(existing[1]);
+            document.getElementById("inp").innerHTML = content.join("");
+            cursorPos = cursorPos - 1;
+        }
+        if (direction === "right") {
+            var content2 = existing[1].split("");
+            var x = content2[0];
+            console.log(content, content2);
+            content2[0] = "|";
+            content.push(x);
+            for (var i = 0; i < content2.length; i++) {
+                content.push(content2[i]);
+            }
+            document.getElementById("inp").innerHTML = content.join("");
+            cursorPos = cursorPos + 1;
+        }
+
+    }
+
+}
+
+
+    function backspace(){
+        if(document.getElementById("inp").innerHTML === "|"){
+            console.log("nothing to be deleted");
+        }
+        else{
+            var existing = document.getElementById("inp").innerHTML.split("|");
+            var content = existing[0].split("");
+            var x = content[cursorPos-1];
+            if(cursorPos === 0){
+                console.log("nothing to be deleted")//
+                content[cursorPos] = "|";
+
+            } else {
+                content[cursorPos - 1] = "|";
+            }
+            content.push(existing[1]);
+            document.getElementById("inp").innerHTML = content.join("");
+            if(cursorPos === 0){
+                cursorPos = 0;
+            } else {
+                cursorPos = cursorPos-1;
+            }
+           }
+            console.log(content);
+    }
+
+
+
+    function wordC(){
+        var lastW = getWords();
+        replaceWord(compare(lastW));
+    }
+
+    function getWords(){
+        var existing = document.getElementById("inp").innerHTML.split("|");
+        var content = existing[0].split(" ");
+        console.log(content[content.length-1]+".");
+        return content[content.length-1];
+    }
+
+
+    var allthewords = [];
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                getAndPass(this.responseText);
+                console.log("LOADED DICTIONARY DATA");
+            }
+        };
+        xhttp.open("GET", "dictionary.txt", true);
+        xhttp.send();
+    }
+
+    function getAndPass(text) {
+        allthewords = text.split(/[\s,\n]+/);
+        console.log("data parsed");
+    }
+
+
+
+
+
+    function compare(text) {
+        var lowestDifference = text.length;
+        var closestMatch = null;
+        var firstletter = text.charAt(0);
+        var upperCase = false;
+        if(firstletter == firstletter.toUpperCase()){
+            upperCase = true;
+        }
+
+        for (var i = 0; i < allthewords.length; i++) {
+            var entry = allthewords[i].toLowerCase();
+            if (text.toLowerCase() === entry) {
+                console.log("word is correct");
+                lowestDifference = 0;
+                if(upperCase == true){
+                    var c = entry.charAt(0).toUpperCase();
+                    var rtn = c + entry.slice(1);
+                    return rtn;
+                } else{
+                    return entry;
+                }
+
+            }
+            else if (text.length === entry.length) {
+                var diff = findDifferences(text, entry);
+                if (diff < lowestDifference) {
+                    lowestDifference = diff;
+                    closestMatch = entry;
+                }
+            }
+        }
+        if(upperCase == true){
+            if(lowestDifference == text.length){
+                var c = text.charAt(0).toUpperCase();
+                var rtn = c + text.slice(1);
+                console.log("One");
+                return rtn;
+            }else{
+                var c = closestMatch.charAt(0).toUpperCase();
+                var rtn = c + closestMatch.slice(1);
+                console.log(rtn);
+                console.log("Two");
+                return rtn;
+            }
+        }
+        else{
+            if(lowestDifference == text.length){
+                console.log("Three");
+                return text;
+            }else{
+                console.log("Four");
+                return closestMatch;
+            }
+        }
+
+    }
+
+    function findDifferences(text, entry) {
+        var count = 0;
+        for (var i = 0; i < text.length; i++) {
+            if (text.charAt(i) !== entry.charAt(i)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    function replaceWord(replacement){
+        var existing = document.getElementById("inp").innerHTML.split("|");
+        var content = existing[0].split(" ");
+        content[content.length - 1] = replacement.concat("|");
+        content.push(existing[1]);
+        document.getElementById("inp").innerHTML = content.join(" ");
+    }
+
+
+    function startTracking(){
+        var keyb = document.getElementById("inp");
+        keyb.addEventListener("touchstart", ontouchstart);
+        keyb.addEventListener("touchend", ontouchend);
+        keyb.addEventListener("touchcancel", ontouchend);
+        window.addEventListener("devicemotion", detectMotion);
+        console.log("loadeds");
+    }
+
+
+    function ontouchstart(event){
+        x = event.touches[0].clientX;
+        y = event.touches[0].clientY;
+
+
+    };
+
+    function ontouchend(event){
+        console.log("touch end");
+    };
+
+function detectMotion(){
+
+        var y = event.accelerationIncludingGravity.y,
+            z = event.accelerationIncludingGravity.z, pitch;
+        pitch = Math.atan(y / z) * 180 / Math.PI;
+        pitch = Math.round(pitch);
+
+        if (pitch < 30) {
+            var nodes = document.getElementsByClassName("keyb")[0];
+            var allbtn = nodes.getElementsByTagName("button");
+            for (var i = 0; i < allbtn.length; i++) {
+                allbtn[i].style.color = "black";
+                allbtn[i].style.transition = "1s";
+            }
+
+        }
+        else if (pitch > 20) {
+
+
+                var nodes = document.getElementsByClassName("keyb")[0];
+                var allbtn = nodes.getElementsByTagName("button");
+                for (var i = 0; i < allbtn.length; i++) {
+                    allbtn[i].style.transition = "1.5s";
+                    allbtn[0].style.color = allbtn[1].style.color = allbtn[9].style.color = allbtn[10].style.color = allbtn[11].style.color = allbtn[12].style.color =allbtn[19].style.color = allbtn[20].style.color  = allbtn[22].style.color = allbtn[23].style.color = allbtn[28].style.color =allbtn[29].style.color ="firebrick";
+                    allbtn[2].style.color = allbtn[3].style.color = allbtn[7].style.color = allbtn[8].style.color = allbtn[13].style.color = allbtn[14].style.color  =allbtn[17].style.color = allbtn[18].style.color = allbtn[24].style.color = allbtn[25].style.color = allbtn[26].style.color = allbtn[27].style.color ="#66ffcc";
+                    allbtn[4].style.color = allbtn[5].style.color  = allbtn[6].style.color = allbtn[15].style.color = allbtn[16].style.color =  "#8db0f2";
+                }
+
+        }
+
+    }
+
+
+
+
+function init(){
+loadDoc();
+startTracking();
+detectMotion();
+}
+
+
+window.addEventListener("load", init);
+
+</script>
+
+
+
+</body>
+</html>
