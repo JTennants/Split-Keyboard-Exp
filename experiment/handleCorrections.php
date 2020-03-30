@@ -13,11 +13,13 @@ $dbname = "rnb16141";
 $conn = new mysqli($host, $user, $pass, $dbname);
 
 $entryID = rand();
-$accid = 4;
+$accid = $_SESSION["accept_id"];
 $backspace = $_REQUEST["bsp"];
 $alg = $_REQUEST["corc"];
+$pID = $_REQUEST["phraseID"];
+$dID = $_REQUEST["styleID"];
 
-$sql = "INSERT INTO `corrections_exp1` (`entryID`,`accept_id`, `design_id`, `phrase_id`, `alg_corrections`, `manual_corrections`) VALUES ('$entryID','595765', '34' , '30948' , '$alg', '$backspace')";
+$sql = "INSERT INTO `corrections_exp1` (`entryID`,`accept_id`, `design_id`, `phrase_id`, `alg_corrections`, `manual_corrections`) VALUES ('$entryID','$accid', '$dID' , '$pID' , '$alg', '$backspace')";
 
 
 if($conn->query($sql) === TRUE){echo "backspace corrections are : " .$backspace . " and algorithm corrections are: ".$alg;}
